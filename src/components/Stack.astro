@@ -1,0 +1,105 @@
+---
+import { getCollection } from "astro:content";
+import * as simpleIcons from "simple-icons";
+
+const stackEntries = await getCollection("stack");
+const categories = stackEntries[0].data.categories;
+
+const getIcon = (iconName: string) => {
+    return (simpleIcons as Record<string, { path: string; hex: string }>)[
+        iconName
+    ];
+};
+---
+
+<section id="stack" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+        <div class="mb-12">
+            <p class="text-accent font-mono text-sm mb-2">// 02</p>
+            <h2 class="text-3xl md:text-4xl font-bold">Stack technique</h2>
+            <p class="text-text-secondary mt-2">
+                Les technologies que j'utilise au quotidien.
+            </p>
+        </div>
+
+        <div class="space-y-6">
+            {
+                categories.map((category) => (
+                    <div>
+                        <div class="flex items-center gap-3 mb-5">
+                            <span class="text-xs font-mono text-accent uppercase tracking-wider">
+                                {category.name}
+                            </span>
+                            <div class="flex-1 h-px bg-border" />
+                            <span class="text-xs font-mono text-text-muted">
+                                {category.techs.length
+                                    .toString()
+                                    .padStart(2, "0")}
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                            {category.techs.map((tech) => {
+                                const icon = getIcon(tech.icon);
+
+                                return (
+                                    <div
+                                        class="group relative card !p-3 cursor-default"
+                                        style={
+                                            icon
+                                                ? `--tech-color: #${icon.hex}`
+                                                : ""
+                                        }
+                                    >
+                                        <div class="flex items-center gap-2.5">
+                                            {icon && (
+                                                <svg
+                                                    role="img"
+                                                    viewBox="0 0 24 24"
+                                                    class="w-5 h-5 shrink-0 fill-text-secondary group-hover:fill-[var(--tech-color)] transition-colors duration-300"
+                                                >
+                                                    <path d={icon.path} />
+                                                </svg>
+                                            )}
+
+                                            <div class="min-w-0 flex-1">
+                                                <h3 class="text-sm font-medium text-text-primary truncate">
+                                                    {tech.name}
+                                                </h3>
+                                                <div class="flex gap-0.5 mt-1">
+                                                    {Array.from({
+                                                        length: 5,
+                                                    }).map((_, i) => (
+                                                        <span
+                                                            class={`h-0.5 flex-1 rounded-full transition-colors ${
+                                                                i < tech.level
+                                                                    ? "bg-accent group-hover:bg-[var(--tech-color)]"
+                                                                    : "bg-border"
+                                                            }`}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-56 p-3 bg-bg-soft border border-border rounded-lg shadow-xl shadow-black/40 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-20 pointer-events-none">
+                                            <p class="text-xs font-mono text-accent mb-1.5">
+                                                {tech.years} an
+                                                {tech.years > 1 ? "s" : ""} ·
+                                                niveau {tech.level}/5
+                                            </p>
+                                            <p class="text-xs text-text-secondary leading-relaxed">
+                                                {tech.description}
+                                            </p>
+                                            <div class="absolute top-full left-1/2 -translate-x-1/2 w-2 h-2 bg-bg-soft border-r border-b border-border rotate-45 -mt-1" />
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
