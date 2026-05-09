@@ -36,7 +36,9 @@ const {
 
     <body>
         <div class="grid-background"></div>
-        <slot />
+        <div class="relative z-10">
+            <slot />
+        </div>
         <Analytics />
         <SpeedInsights />
     </body>
