@@ -30,7 +30,7 @@ categories:
             icon: siTypescript
             level: 4
             years: 3
-            description: Mon langage de prédilection. Le typage strict évite tellement de bugs que je ne reviendrais plus en arrière.
+            description: Le typage en dev c'est important ;).
 
           - name: Astro
             icon: siAstro
@@ -42,7 +42,7 @@ categories:
             icon: siTailwindcss
             level: 4
             years: 3
-            description: Productivité maximale pour styler. Mon couteau suisse pour prototyper.
+            description: Tailwind > Sass ;).
 
     - name: Backend
       techs:
@@ -66,15 +66,15 @@ categories:
 
           - name: Supabase
             icon: siSupabase
-            level: 3
+            level: 2
             years: 0
-            description: Ma base de données relationnelle préférée. Robuste et performante.
+            description: Encore débutant sur Supabase.
 
           - name: MongoDB
             icon: siMongodb
-            level: 2
+            level: 3
             years: 3
-            description: Ma base de données relationnelle préférée. Robuste et performante.
+            description: Ma base de donnée NoSQL préférée.
 
     - name: Outils
       techs:
@@ -82,7 +82,7 @@ categories:
             icon: siGit
             level: 4
             years: 5
-            description: Versioning au quotidien, rebase, cherry-pick — toute la stack avancée.
+            description: Versioning au quotidien, rebase, cherry-pick.
 
           - name: Docker
             icon: siDocker
@@ -100,5 +100,5 @@ categories:
             icon: siApple
             level: 3
             years: 0
-            description: Mon environnement de dev quotidien. Ubuntu sur le laptop.
+            description: Mon environnement de dev quotidien.
 ---

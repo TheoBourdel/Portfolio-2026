@@ -1,7 +1,7 @@
 ---
 bio:
     - Bonjour ! Je suis **Théo**, un développeur full stack basé proche de Paris. Je crée des sites web, applications web et application mobile qui mettent l'accent sur l'expérience utilisateur, la performance et le détail.
-    - Mon parcours a débuté en 2021 à l'ESGI. Aujourd'hui je travaille principalement avec des technologies comme React, TypeScript et Astro.
+    - Mon parcours a débuté en 2021 à l'ESGI. Aujourd'hui je travaille principalement avec des technologies comme React, TypeScript, NodeJs.
 
 stats:
     - label: Années sur le clavier
