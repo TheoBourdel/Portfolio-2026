@@ -17,7 +17,7 @@
     }
 }
 
-@layer components {‡
+@layer components {
     .grid-background {
         position: fixed;
         inset: 0;
