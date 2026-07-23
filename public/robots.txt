@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://theobourdel.fr/sitemap-index.xml
