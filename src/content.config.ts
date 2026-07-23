@@ -1,16 +1,23 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const aboutCollection = defineCollection({
-    type: 'content',
+    loader: glob({
+        pattern: '**/*.md',
+        base: './src/content/about',
+    }),
     schema: z.object({
-        bio: z.array(z.string()),  // chaque string = un paragraphe de la bio
+        bio: z.array(z.string()),
+
         stats: z.array(
             z.object({
                 label: z.string(),
                 value: z.string(),
-                accent: z.boolean().default(false),  // si true, valeur en violet
+                accent: z.boolean().default(false),
             })
         ),
+
         experiences: z.array(
             z.object({
                 role: z.string(),
@@ -19,6 +26,7 @@ const aboutCollection = defineCollection({
                 current: z.boolean().default(false),
             })
         ),
+
         studies: z.array(
             z.object({
                 degree: z.string(),
@@ -26,6 +34,7 @@ const aboutCollection = defineCollection({
                 period: z.string(),
             })
         ),
+
         hobbies: z.array(
             z.object({
                 icon: z.string(),
@@ -35,27 +44,41 @@ const aboutCollection = defineCollection({
     }),
 });
 
+
 const projectsCollection = defineCollection({
-    type: 'content',
-    schema: ({ image }) => z.object({
-        title: z.string(),
-        description: z.string(),
-        date: z.date(),
-        image: image().optional(),
-        github: z.string().url().optional(),
-        demo: z.string().url().optional(),
-        featured: z.boolean().default(false),
-        status: z.enum(['completed', 'in-progress', 'archived']).default('completed'),
-        techStack: z.array(z.string()).default([]),
+    loader: glob({
+        pattern: '**/*.md',
+        base: './src/content/projects',
     }),
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            description: z.string(),
+            date: z.date(),
+            image: image().optional(),
+            github: z.string().url().optional(),
+            demo: z.string().url().optional(),
+            featured: z.boolean().default(false),
+            status: z.enum([
+                'completed',
+                'in-progress',
+                'archived'
+            ]).default('completed'),
+            techStack: z.array(z.string()).default([]),
+        }),
 });
 
+
 const stackCollection = defineCollection({
-    type: 'content', // ⬅️ "content" pour accepter du Markdown
+    loader: glob({
+        pattern: '**/*.md',
+        base: './src/content/stack',
+    }),
     schema: z.object({
         categories: z.array(
             z.object({
                 name: z.string(),
+
                 techs: z.array(
                     z.object({
                         name: z.string(),
@@ -69,6 +92,7 @@ const stackCollection = defineCollection({
         ),
     }),
 });
+
 
 export const collections = {
     projects: projectsCollection,

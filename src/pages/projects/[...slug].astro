@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import * as simpleIcons from "simple-icons";
 import Layout from "../../layouts/Layout.astro";
@@ -8,17 +8,17 @@ import Navbar from "../../components/Navbar.astro";
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
     return projects.map((project) => ({
-        params: { slug: project.slug },
+        params: { slug: project.id },
         props: { project },
     }));
 }
 
 const { project } = Astro.props;
-const { Content } = await project.render();
+const { Content } = await render(project);
 const { title, description, date, image, github, demo, status, techStack } =
     project.data;
 
-const wordCount = project.body.split(/\s+/).length;
+const wordCount = project.body?.split(/\s+/).length ?? 0;
 const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
 const getIcon = (iconName: string) => {
