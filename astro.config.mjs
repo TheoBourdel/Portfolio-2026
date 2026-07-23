@@ -1,11 +1,17 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://theobourdel.fr',
+
   integrations: [
-    tailwind(),
     sitemap(),
   ],
+
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
 });
